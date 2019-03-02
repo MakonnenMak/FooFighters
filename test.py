@@ -22,5 +22,5 @@ with io.open(file_name, 'rb') as image_file:
         # Performs label detection on the image file
         response = client.document_text_detection(image=image, max_results=5)
         document = response.full_text_annotation
-        print(document.text)
+        print(document)
 
