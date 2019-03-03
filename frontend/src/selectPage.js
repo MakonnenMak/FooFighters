@@ -38,7 +38,8 @@ import { spacing } from '@material-ui/system';
 const styles = theme => ({
   container: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(12, 1fr)',
+    gridTemplateColumns: 'repeat(12, 1fr)',    
+    gridTemplateRows: 'repeat(12, 1fr)',
     gridGap: `${theme.spacing.unit * 5}px`,
   },
   paper: {
@@ -76,8 +77,16 @@ function CSSGrid(props) {
         <Divider className={classes.divider} />
 
       <div className={classes.container}>
-        <div style={{ gridRowStart: '1', gridRowEnd: 'span 8', gridColumnStart: '1', gridColumnEnd: 'span 5' }}>
+        <div style={{ gridRowStart: '1', gridRowEnd: 'span 8', gridColumnStart: '1', gridColumnEnd: 'span 6' }}>
           <Paper className={classes.paper} style={{fontSize: '30px'}}>yeet<p>yeet yeet</p><p>yeet yeet yeet</p><p>Yeet plz just put ur receipts in here</p></Paper>
+        </div>
+
+        <div style={{ gridRowStart: '4', gridRowEnd: 'span 8', gridColumnStart: '7', gridColumnEnd: 'span 5' }}>
+          <Paper className={classes.paper} style={{fontSize: '30px'}}>yeet<p>yeet yeet</p><p>yeet yeet yeet</p><p>Yeet plz just put ur answers</p></Paper>
+        </div>
+
+        <div style={{ gridRowStart: '11', gridRowEnd: 'span 8', gridColumnStart: '7', gridColumnEnd: 'span 5' }}>
+          <p> Num items you've claimed:</p>
           </div>
       </div>
     </div>
