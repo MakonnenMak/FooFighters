@@ -1,14 +1,14 @@
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
-import { spacing } from '@material-ui/system';
+// import Grid from '@material-ui/core/Grid';
+// import { spacing } from '@material-ui/system';
 
 const styles = theme => ({
   container: {
@@ -45,6 +45,7 @@ function CSSGrid(props) {
             color="primary"
             size="large"
             style={{height: 56}}
+            onClick={() => {console.log(props.rootState.userEmail)}}
           >
           Create New Receipt
           </Button>
