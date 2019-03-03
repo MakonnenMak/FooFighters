@@ -3,6 +3,7 @@ import Login from './loginPage';
 import NewReceipt from './NewReceipt';
 import Homepage from './homepage';
 import Select from './selectPage';
+import Finished from './finishedReceipt';
 import './App.css';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ class App extends Component {
           <Route path="/dashboard" component={Homepage}/>
           <Route path="/newreceipt" component={NewReceipt}/>
           <Route path="/editreceipt" component={Select}/>
+          <Route path ="/finishedreceipt" component={Finished}/>
         </div>
       </Router>
     );
