@@ -8,7 +8,16 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <Typography component="h2" variant="h2">Welcome</Typography>
+        <Typography
+          component="h2"
+          variant="h2"
+          style={{
+            marginTop: 150,
+            marginBottom: 50
+          }}
+        >
+          Welcome
+        </Typography>
         <TextField label="email" variant="outlined"/>
         <Link to="/dashboard">
           <Button

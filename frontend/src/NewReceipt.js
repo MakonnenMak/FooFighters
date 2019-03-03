@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormGroup from '@material-ui/core/FormGroup';
 import Webcam from 'react-webcam';
+import { Link } from 'react-router-dom';
 
 const textFieldStyle = {
   width: 500,
@@ -14,7 +15,6 @@ const textFieldStyle = {
 const videoConstraints = {
       width: 1280,
       height: 720,
-      facingMode: {exact: "environment"},
 };
 
 class NewReceipt extends Component {
@@ -22,16 +22,73 @@ class NewReceipt extends Component {
     this.webcam = webcam;
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      image_source: "",
+      imageTaken: false,
+    };
+  }
+
+  capture = () => {
+    const imageSrc = this.webcam.getScreenshot();
+    this.setState({
+      image_source: imageSrc,
+      imageTaken: true,
+    });
+  };
+
+  recapture = () => {
+    this.setState({
+      image_source: "",
+      imageTaken: false,
+    })
+  }
+
+
   render() {
-    return (
-      <div>
+    let image, clickFunc;
+    if (this.state.imageTaken) {
+      image =
+        <img
+          src={this.state.image_source} 
+          alt="camera"
+          style={
+            {
+              margin: "0 auto",
+              marginTop: 60,
+              marginBottom: 60,
+            }}
+        />;
+        clickFunc = this.recapture;
+    } else {
+      image = 
         <Webcam
           audio={false}
           ref={this.setRef}
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
-        />
+        />;
+        clickFunc = this.capture;
+
+    }
+
+    return (
+      <div>
         <Typography component="h2" variant="h2">New Receipt</Typography>
+        { image }
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={clickFunc}
+          style={{
+            display: "block",
+            margin: "0 auto"
+          }}
+        >
+        {this.state.imageTaken ? "Recapture": "Capture"}
+        </Button>
         <FormGroup>
           <TextField label="Name" variant="outlined" style={textFieldStyle}/>
           <TextField label="Venmo Id" variant="outlined" style={textFieldStyle}/>
@@ -41,13 +98,15 @@ class NewReceipt extends Component {
           <TextField label="Recepient 4 email" variant="outlined" style={textFieldStyle}/>
           <TextField label="Recepient 5 email" variant="outlined" style={{...textFieldStyle, marginBottom: 20}}/>
         </FormGroup>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-        >
-        Next
-        </Button>
+        <Link to="/">
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+          >
+          Next
+          </Button>
+        </Link>
       </div>
     );
   }
