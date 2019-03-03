@@ -33,6 +33,7 @@ def get_document_bounds(image_file, feature):
     client = vision.ImageAnnotatorClient()
 
     bounds = []
+    words_list= []
 
     with io.open(image_file, 'rb') as image_file:
         content = image_file.read()
@@ -53,6 +54,7 @@ def get_document_bounds(image_file, feature):
 
                     if (feature == FeatureType.WORD):
                         bounds.append(word.bounding_box)
+                        words_list.append(word)
 
                 if (feature == FeatureType.PARA):
                     bounds.append(paragraph.bounding_box)
@@ -63,23 +65,26 @@ def get_document_bounds(image_file, feature):
         if (feature == FeatureType.PAGE):
             bounds.append(block.bounding_box)
 
-    # The list `bounds` contains the coordinates of the bounding boxes.
-    return bounds
+    #print(words_list)
 
+    # The list `bounds` contains the coordinates of the bounding boxes.
+    return bounds, words_list
+    #return words_list
 
 def render_doc_text(filein, fileout):
     image = Image.open(filein)
-    bounds = get_document_bounds(filein, FeatureType.PAGE)
+    bounds, page_list = get_document_bounds(filein, FeatureType.PAGE)
     draw_boxes(image, bounds, 'blue')
-    bounds = get_document_bounds(filein, FeatureType.PARA)
+    bounds, para_list = get_document_bounds(filein, FeatureType.PARA)
     draw_boxes(image, bounds, 'red')
-    bounds = get_document_bounds(filein, FeatureType.WORD)
+    bounds, words_list = get_document_bounds(filein, FeatureType.WORD)
     draw_boxes(image, bounds, 'yellow')
 
     if fileout is not 0:
         image.save(fileout)
     else:
         image.show()
+    return words_list
 
 
 if __name__ == '__main__':
@@ -88,4 +93,65 @@ if __name__ == '__main__':
     parser.add_argument('-out_file', help='Optional output file', default=0)
     args = parser.parse_args()
 
-    render_doc_text(args.detect_file, args.out_file)
+    words_list = render_doc_text(args.detect_file, args.out_file)
+    #words_list = get_document_bounds(args.detect_file, args.out_file)
+
+    # print(words_list)
+    # print("--------------------------------------------")
+    words_list.sort(key=lambda word:word.bounding_box.vertices[0].y)
+    #words_list.sort(key=lambda word:word.bounding_box.vertices[0].x)
+
+
+    receipt_line = []
+    prev_word = words_list[0]
+    cur_line = []
+
+    #print(words_list)
+    for word in words_list:
+        #means it's a new line, stored separately
+        if (abs(word.bounding_box.vertices[3].y - prev_word.bounding_box.vertices[3].y) > 45):
+            #print(abs(word.bounding_box.vertices[0].y - word.bounding_box.vertices[3].y))
+            ##sort the current line
+            cur_line.sort(key=lambda word:word.bounding_box.vertices[3].x)
+
+            ##append the current line to the receipt
+            receipt_line.append(cur_line)
+
+            ##clear out the current line
+            cur_line = []
+            prev_word = word
+
+        else:
+            cur_line.append(word)
+            #receipt_line[-1][-1].append(word)
+
+    #print(receipt_line)
+
+    words_in_row_list = []
+    string_word= ""
+
+    #going through each row in the main list
+    for i in range (0, len(receipt_line)):
+        #going through each word in the main list
+        for word in range (0, len(receipt_line[i])):
+            #print(receipt_line[i][word])
+            for symbol in receipt_line[i][word].symbols:
+                string_word += symbol.text
+                #row_list.append(symbol.text)
+                #print(symbol.text)
+            words_in_row_list.append(string_word.encode('utf-8').strip())
+            string_word = ""
+        final_string = ' '.join(words_in_row_list)
+        print(final_string)
+        words_in_row_list = []
+
+        # print(words_in_row_list[i])
+
+
+        #print(receipt_line[i][0].symbols)
+        #char_list = [line.text for line in [symbol.text for symbol in receipt_line[i].symbols]]
+        #print(''.join(list(char_list)).encode('utf-8').strip())
+
+
+
+        #print(word.bounding_box.vertices[0].y)
