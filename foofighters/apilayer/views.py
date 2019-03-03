@@ -108,7 +108,7 @@ def predict(b):
     data = b
     headers = {"Prediction-key": pred_key, "Content-Type": content_type}
     r = requests.post(pred_url, data=data, headers=headers)
-    return json.loads(r.content)['predictions'][0]['tagName']
+    return json.loads(r.content)['predictions'][0]
 
 
 def food_extract(line):
