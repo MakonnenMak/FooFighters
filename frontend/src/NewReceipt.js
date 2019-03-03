@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import FormGroup from '@material-ui/core/FormGroup';
 import Webcam from 'react-webcam';
 import { Redirect } from 'react-router';
-// import axios from 'axios';
+import axios from 'axios';
 
 const textFieldStyle = {
   width: 500,
@@ -56,9 +56,38 @@ class NewReceipt extends Component {
 
   handleButtonClick = () => {
     if (this.state.imageTaken) {
-      this.setState({
-        ...this.state,
-        navigate: true
+        let recepients = []
+        if (this.state.recepients1) {
+          recepients.push(this.state.recepients1);
+        }
+        if (this.state.recepients2) {
+          recepients.push(this.state.recepients2);
+        }
+        if (this.state.recepients3) {
+          recepients.push(this.state.recepients3);
+        }
+        if (this.state.recepients4) {
+          recepients.push(this.state.recepients4);
+        }
+        if (this.state.recepients5) {
+          recepients.push(this.state.recepients5);
+        }
+        recepients.push(this.props.rootState.userEmail);
+
+      let data = {
+        recepients: recepients,
+        venmo_id: this.state.venmo,
+        img_url: this.state.image_source,
+      };
+
+      axios.post("http://localhost:8000/apilayer/senddata/" + this.props.rootState.userEmail, {data})
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        this.setState({
+          ...this.state,
+          navigate: true
+        });
       });
     }
   }

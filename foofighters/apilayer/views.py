@@ -55,7 +55,8 @@ def getallreceipts(self, email):
 @method_decorator(csrf_exempt, name='dispatch')
 def sendData(request, email):
     response = request.POST
-    imgst = response['img-url']
+    print(response)
+    imgst = response['img_url']
     temp = imgst.split(',')
     imgstring = temp[1]
     
