@@ -1,7 +1,7 @@
 // import React, { Component } from 'react';
-// import Typography from '@material-ui/core/Typography';
-// import TextField from '@material-ui/core/TextField';
-// import Button from '@material-ui/core/Button';
+//import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 // class Homepage extends Component {
 //   render() {
@@ -29,6 +29,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
+import { spacing } from '@material-ui/system';
 
 const styles = theme => ({
   container: {
@@ -54,22 +55,36 @@ function CSSGrid(props) {
   return (
 
     <div>
+
+      <div>
+        <div>
+          <p>  </p>
+        </div>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          style={{height: 50}, {fontSize: '40px'}}
+        >
+        Create New Receipt
+        </Button>
+      </div>
         <Divider className={classes.divider} />
 
       <div className={classes.container}>
-        <div style={{ gridColumnEnd: 'span 3' }}>
+        <div style={{  gridColumnStart: '1', gridColumnEnd: 'span 4' }}>
           <Paper className={classes.paper}>receipt1</Paper>
         </div>
-        <div style={{ gridColumnEnd: 'span 3' }}>
+        <div style={{ gridColumnEnd: 'span 4'}}>
           <Paper className={classes.paper}>xs=3</Paper>
         </div>
-        <div style={{ gridColumnEnd: 'span 3' }}>
+        <div style={{ gridColumnEnd: 'span 4' }}>
           <Paper className={classes.paper}>xs=3</Paper>
         </div>
-        <div style={{ gridColumnEnd: 'span 3' }}>
+        <div style={{ gridColumnStart: '1', gridColumnEnd: 'span 4' }}>
           <Paper className={classes.paper}>xs=3</Paper>
         </div>
-        <div style={{ gridColumnEnd: 'span 8' }}>
+        <div style={{ gridColumnEnd: 'span 4' }}>
           <Paper className={classes.paper}>xs=8</Paper>
         </div>
         <div style={{ gridColumnEnd: 'span 4' }}>
