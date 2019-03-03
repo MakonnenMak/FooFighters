@@ -13,10 +13,17 @@ class Paygroup(models.Model):
 
 
 class Receipt(models.Model):
+    name = models.CharField(max_length= 300, default = '')
     date = models.DateField(auto_now_add=True)
     info = models.TextField(default='')
     dic = models.TextField(default='')
     completed = models.BooleanField(default=False)
+    notcompletedlist = models.CharField(max_length = 1000, default='')
+    completedlist = models.CharField(max_length=1000, default='')
+    totlist= models.CharField(max_length=1000, default='')
+    venmo_id = models.CharField(max_length = 200, default='')
+    src = models.TextField(default='')
+    
 
 
 class Profile(models.Model):
