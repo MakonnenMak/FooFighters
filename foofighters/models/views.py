@@ -9,6 +9,13 @@ from .models import Profile, Paygroup, Receipt
 from django.contrib.auth.models import User
 
 @method_decorator(csrf_exempt, name='dispatch')
+def getAll(request):
+    allreceipts = Receipt.objects.all()
+    data = serializers.serialize('json', allreceipts)
+    json_receipt = json.loads(data)
+    return JsonResponse({'receipt': json_receipt})
+
+@method_decorator(csrf_exempt, name='dispatch')
 def getReceipt(request, receipt_id):
     try:
         receipt = Receipt.objects.filter(pk=receipt_id)
@@ -21,15 +28,16 @@ def getReceipt(request, receipt_id):
 @method_decorator(csrf_exempt, name='dispatch')
 def createReceipt(request):
     data = request.POST
+    print(data)
     emailname = data['name']
     information = data['info']
     diction = data['dic']
     complete = data['completed']
     venmo = data['venmo_id']
     nclist = data['notcompletedlist']
-    clist = data['completedlist']
     tlist = data['totlist']
-    r = Receipt(info=information, dic=diction, completed=complete, name =emailname, venmo_id=venmo, notcompletedlist=nclist, completedlist=clist, totlist=tlist)
+    imgsrc = data['src']
+    r = Receipt(info=information, dic=diction, completed=complete, name =emailname, venmo_id=venmo, notcompletedlist=nclist, totlist=tlist, src=imgsrc)
     r.save()
     pkid = r.id
     try:
@@ -53,6 +61,7 @@ def updateReceipt(request, receipt_id):
         nclist = data['notcompletedlist']
         clist = data['completedlist']
         tlist = data['totlist']
+        imgsrc = data['src']
         receipt.info = information
         receipt.dic = diction
         receipt.completed = complete
@@ -61,6 +70,7 @@ def updateReceipt(request, receipt_id):
         receipt.notcompletedlist = nclist
         receipt.completedlist = clist
         receipt.totlist = tlist
+        receipt.src = imgsrc
         receipt.save()
         receipt = Receipt.objects.filter(pk=receipt_id)
         data = serializers.serialize('json', receipt)

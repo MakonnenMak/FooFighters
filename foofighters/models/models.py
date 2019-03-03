@@ -22,6 +22,7 @@ class Receipt(models.Model):
     completedlist = models.CharField(max_length=1000, default='')
     totlist= models.CharField(max_length=1000, default='')
     venmo_id = models.CharField(max_length = 200, default='')
+    src = models.TextField(default='')
     
 
 
