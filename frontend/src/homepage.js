@@ -73,22 +73,22 @@ function CSSGrid(props) {
 
       <div className={classes.container}>
         <div style={{  gridColumnStart: '1', gridColumnEnd: 'span 4' }}>
-          <Paper className={classes.paper}>receipt1</Paper>
+          <Paper className={classes.paper} style={{fontSize: '30px'}}>receipt1<p>Kroger</p><p>Date</p></Paper>
         </div>
         <div style={{ gridColumnEnd: 'span 4'}}>
-          <Paper className={classes.paper}>xs=3</Paper>
+          <Paper className={classes.paper} style={{fontSize: '30px'}}>receipt2<p>Kroger</p><p>Date</p></Paper>
         </div>
         <div style={{ gridColumnEnd: 'span 4' }}>
-          <Paper className={classes.paper}>xs=3</Paper>
+          <Paper className={classes.paper} style={{fontSize: '30px'}}>receipt3<p>Kroger</p><p>Date</p></Paper>
         </div>
         <div style={{ gridColumnStart: '1', gridColumnEnd: 'span 4' }}>
-          <Paper className={classes.paper}>xs=3</Paper>
+          <Paper className={classes.paper} style={{fontSize: '30px'}}>receipt4<p>Kroger</p><p>Date</p></Paper>
         </div>
         <div style={{ gridColumnEnd: 'span 4' }}>
-          <Paper className={classes.paper}>xs=8</Paper>
+          <Paper className={classes.paper} style={{fontSize: '30px'}}>receipt5<p>Kroger</p><p>Date</p></Paper>
         </div>
         <div style={{ gridColumnEnd: 'span 4' }}>
-          <Paper className={classes.paper}>xs=4</Paper>
+          <Paper className={classes.paper} style={{fontSize: '30px'}}>receipt6<p>Kroger</p><p>Date</p></Paper>
         </div>
       </div>
     </div>
