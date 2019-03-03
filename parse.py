@@ -55,7 +55,7 @@ def cleaner(line):
 #def maybe_cleaner(line):
 #
 #
-with open('results2.txt') as f:
+with open('results.txt') as f:
     lines=f.readlines()
     
     init_food_list=[]
