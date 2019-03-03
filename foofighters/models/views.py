@@ -28,16 +28,14 @@ def getReceipt(request, receipt_id):
 @method_decorator(csrf_exempt, name='dispatch')
 def createReceipt(request):
     data = request.POST
-    print(data)
     emailname = data['name']
     information = data['info']
     diction = data['dic']
-    complete = data['completed']
     venmo = data['venmo_id']
     nclist = data['notcompletedlist']
     tlist = data['totlist']
     imgsrc = data['src']
-    r = Receipt(info=information, dic=diction, completed=complete, name =emailname, venmo_id=venmo, notcompletedlist=nclist, totlist=tlist, src=imgsrc)
+    r = Receipt(info=information, dic=diction, name =emailname, venmo_id=venmo, notcompletedlist=nclist, totlist=tlist, src=imgsrc)
     r.save()
     pkid = r.id
     try:
