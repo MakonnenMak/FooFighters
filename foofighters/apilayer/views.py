@@ -54,9 +54,8 @@ def getallreceipts(self, email):
 
 @method_decorator(csrf_exempt, name='dispatch')
 def sendData(request, email):
-    response = request.POST
-    print(response)
-    imgst = response['img_url']
+    response = json.loads(request.body.decode('utf-8'))
+    imgst = response.get('img_url')
     temp = imgst.split(',')
     imgstring = temp[1]
     
@@ -91,9 +90,9 @@ def sendData(request, email):
         'info': "",
         'dic': dic,
         'completed': "False",
-        'notcompletedlist': response['recipients'],
+        'notcompletedlist': response['recepients'],
         'completedlist:': "",
-        'totlist': response['recipients'],
+        'totlist': response['recepients'],
         'venmo_id': response['venmo_id'],
         'src': filename,
     }

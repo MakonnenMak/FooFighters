@@ -35,6 +35,7 @@ def createReceipt(request):
     nclist = data['notcompletedlist']
     tlist = data['totlist']
     imgsrc = data['src']
+    print(imgsrc)
     r = Receipt(info=information, dic=diction, name =emailname, venmo_id=venmo, notcompletedlist=nclist, totlist=tlist, src=imgsrc)
     r.save()
     pkid = r.id

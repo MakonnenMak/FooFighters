@@ -79,8 +79,8 @@ class NewReceipt extends Component {
         venmo_id: this.state.venmo,
         img_url: this.state.image_source,
       };
-
-      axios.post("http://localhost:8000/apilayer/senddata/" + this.props.rootState.userEmail, {data})
+      console.log(data)
+      axios.post("http://localhost:8000/apilayer/senddata/" + this.props.rootState.userEmail, data)
       .then(res => {
         console.log(res);
         console.log(res.data);
