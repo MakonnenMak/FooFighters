@@ -87,10 +87,10 @@ def render_doc_text(filein, fileout):
     bounds, words_list = get_document_bounds(filein, FeatureType.WORD)
     draw_boxes(image, bounds, 'yellow')
 
-    if fileout is not 0:
-        image.save(fileout)
-    else:
-        image.show()
+    #if fileout is not 0:
+    #    image.save(fileout)
+    #else:
+    #    image.show()
     return words_list
 
 
