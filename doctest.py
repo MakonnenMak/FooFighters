@@ -118,10 +118,9 @@ if __name__ == '__main__':
     for word in words_list:
         #means it's a new line, stored separately
 
-        print("Distance: "+str(abs(word.bounding_box.vertices[1].y - prev_word.bounding_box.vertices[0].y)))
-        print(get_word(word))
+        #print("Distance: "+str(abs(word.bounding_box.vertices[1].y - prev_word.bounding_box.vertices[0].y)))
+        #print(get_word(word))
         if (abs(word.bounding_box.vertices[1].y - prev_word.bounding_box.vertices[0].y) > 47):
-            print("-----------------NEW WORD-------------------------------")
             #print(abs(word.bounding_box.vertices[1].y - prev_word.bounding_box.vertices[0].y))
             #print(get_word(word))
             ##sort the current line
@@ -168,9 +167,4 @@ if __name__ == '__main__':
 
 
         #print(word.bounding_box.vertices[0].y)
-def get_word(word):
-    string_word=""
-    for symbol in words.symbols:
-        string_word+=symbol.text
-    return string_word
 
