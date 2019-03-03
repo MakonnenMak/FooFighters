@@ -85,10 +85,11 @@ def sendData(request, email):
                 dic[i[j]] = ""
             if(j == 1):
                 dic[i[j-1]] = i[j]
+    tempdic = json.dumps(dic)
     datatosend = {
         'name': email,
         'info': "",
-        'dic': dic,
+        'dic': tempdic,
         'completed': "False",
         'notcompletedlist': response['recepients'],
         'completedlist:': "",
