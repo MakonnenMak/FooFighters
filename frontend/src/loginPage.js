@@ -13,6 +13,7 @@ class Login extends Component {
           variant="contained"
           color="primary"
           size="large"
+          style={{height: 56}}
         >
         Login
         </Button>
