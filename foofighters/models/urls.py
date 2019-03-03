@@ -5,8 +5,8 @@ from . import views
 urlpatterns = [
     path('receipt/<int:receipt_id>', views.getReceipt, name="getreceipt"),
     path('receipt/create', views.createReceipt, name="postreceipt"),
-    # path("/receipt/create/<int:receipt_id>", views.updateReceipt, name="updatereceipt"),
-    # path("/receipt/delete/<int:receipt_id>", views.deleteReceipt, name="deletereceipt"),
+    path("receipt/create/<int:receipt_id>", views.updateReceipt, name="updatereceipt"),
+    path("receipt/delete/<int:receipt_id>", views.deleteReceipt, name="deletereceipt"),
     # path('/profile/<int:profile_id>', views.getProfile, name="getprofile"),
     # path('/profile/create', views.createProfile, name="postprofile"),
     # path("/profile/create/<int:profile_id>", views.updateProfile, name="updateprofile"),
