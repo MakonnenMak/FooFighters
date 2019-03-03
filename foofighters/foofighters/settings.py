@@ -105,6 +105,8 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 SECURE_SSL_REDIRECT = False
 
+AUTH_PROFILE_MODULE = 'models.Profile'
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 

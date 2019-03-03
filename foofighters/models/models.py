@@ -6,7 +6,7 @@ from django.dispatch import receiver
 # Create your models here.
 
 
-class Group(models.Model):
+class Paygroup(models.Model):
     group_name = models.CharField(max_length=500, default='')
 
 
@@ -20,11 +20,11 @@ class Receipt(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key = True)
     venmo_name = models.CharField(max_length=500, blank=True)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="groups")
+    group = models.ManyToManyField(Paygroup)
     receipts = models.ManyToManyField(Receipt)
-    accumulated = models.DecimalField(max_digits=19, decimal_places=2)
+    accumulated = models.DecimalField(max_digits=19, decimal_places=2, default=0.00)
 
 
 # For linking the profiles to the django user class when calling save()
