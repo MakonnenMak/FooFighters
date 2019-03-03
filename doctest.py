@@ -42,6 +42,7 @@ def get_document_bounds(image_file, feature):
 
     response = client.document_text_detection(image=image)
     document = response.full_text_annotation
+    #print(document.text)
 
     # Collect specified feature bounds by enumerating all document features
     for page in document.pages:
@@ -70,6 +71,12 @@ def get_document_bounds(image_file, feature):
     # The list `bounds` contains the coordinates of the bounding boxes.
     return bounds, words_list
     #return words_list
+
+def get_word(word):
+    string_word=""
+    for symbol in word.symbols:
+        string_word+=symbol.text.encode("utf-8")
+    return string_word
 
 def render_doc_text(filein, fileout):
     image = Image.open(filein)
@@ -106,19 +113,25 @@ if __name__ == '__main__':
     prev_word = words_list[0]
     cur_line = []
 
+
     #print(words_list)
     for word in words_list:
         #means it's a new line, stored separately
-        if (abs(word.bounding_box.vertices[3].y - prev_word.bounding_box.vertices[3].y) > 45):
-            #print(abs(word.bounding_box.vertices[0].y - word.bounding_box.vertices[3].y))
+
+        print("Distance: "+str(abs(word.bounding_box.vertices[1].y - prev_word.bounding_box.vertices[0].y)))
+        print(get_word(word))
+        if (abs(word.bounding_box.vertices[1].y - prev_word.bounding_box.vertices[0].y) > 47):
+            print("-----------------NEW WORD-------------------------------")
+            #print(abs(word.bounding_box.vertices[1].y - prev_word.bounding_box.vertices[0].y))
+            #print(get_word(word))
             ##sort the current line
-            cur_line.sort(key=lambda word:word.bounding_box.vertices[3].x)
+            cur_line.sort(key=lambda word:word.bounding_box.vertices[0].x)
 
             ##append the current line to the receipt
             receipt_line.append(cur_line)
 
             ##clear out the current line
-            cur_line = []
+            cur_line = [word]
             prev_word = word
 
         else:
@@ -155,3 +168,9 @@ if __name__ == '__main__':
 
 
         #print(word.bounding_box.vertices[0].y)
+def get_word(word):
+    string_word=""
+    for symbol in words.symbols:
+        string_word+=symbol.text
+    return string_word
+
