@@ -98,7 +98,7 @@ class NewReceipt extends Component {
           <TextField label="Recepient 4 email" variant="outlined" style={textFieldStyle}/>
           <TextField label="Recepient 5 email" variant="outlined" style={{...textFieldStyle, marginBottom: 20}}/>
         </FormGroup>
-        <Link to="/">
+        <Link to="/dashboard">
           <Button
             variant="contained"
             color="primary"
